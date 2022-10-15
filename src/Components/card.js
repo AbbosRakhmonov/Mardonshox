@@ -4,7 +4,7 @@ import {IoPencil, IoTrash} from 'react-icons/io5'
 
 function Card({data, edit, del}) {
     return (
-        <Link to={'/salom'} className={'col-md-3 text-decoration-none'}>
+        <Link to={`/firm/${data._id}`} className={'col-md-3 text-decoration-none'}>
             <div className={'card p-2 my-card'}>
                 <div className="card-body">
                     <h5 className="card-title h4">{data.name}</h5>

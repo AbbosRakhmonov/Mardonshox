@@ -3,9 +3,9 @@ import {Cell, Column, HeaderCell, Table} from 'rsuite-table'
 import {IoTrash} from 'react-icons/io5'
 
 
-function ConstTable({data, edit, del}) {
+function ConstTable({data, edit, del, loading}) {
     return (
-        <Table data={data} cellBordered={true} wordWrap={'break-word'} loading={false} autoHeight={true}
+        <Table data={data} cellBordered={true} wordWrap={'break-word'} loading={loading} autoHeight={true}
                affixHeader={true} renderEmpty={() => {
             return <div className="rs-table-body-info">No data found</div>
         }} rowHeight={30}
@@ -14,7 +14,12 @@ function ConstTable({data, edit, del}) {
                 <HeaderCell>
                     №
                 </HeaderCell>
-                <Cell dataKey="id"/>
+                <Cell>
+                    {(rowData, rowIndex) => {
+                        return rowIndex + 1
+                    }
+                    }
+                </Cell>
             </Column>
             <Column flexGrow={1} verticalAlign={'middle'}>
                 <HeaderCell style={{background: '#009A42'}}>Кирим</HeaderCell>
