@@ -2,7 +2,7 @@ import axios from 'axios'
 import {logOut} from '../Features/Auth/authSlice'
 import Store from '../App/store'
 
-const baseURL = process.env.NODE_ENV === 'development' ? 'http://localhost:5000/api/v1' : process.env.base_url
+const baseURL = process.env.NODE_ENV === 'development' ? 'http://localhost:5000/api/v1' : process.env.BASE_URL
 
 const instance = axios.create({
     baseURL: baseURL,
