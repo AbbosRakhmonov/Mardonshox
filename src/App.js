@@ -1,5 +1,5 @@
-import {Navigate, Route, Routes} from 'react-router-dom'
-import React, {lazy, useEffect} from 'react'
+import {Navigate, Route, Routes, useNavigate} from 'react-router-dom'
+import React, {lazy, useEffect, useLayoutEffect} from 'react'
 import {useDispatch, useSelector} from 'react-redux'
 import {logIn} from './Features/Auth/authSlice'
 
@@ -13,6 +13,7 @@ const Layout = lazy(() => import('./Features/Layout'))
 
 
 function App() {
+    const navigate = useNavigate()
     const dispatch = useDispatch()
     const {isLogged} = useSelector(state => state.auth)
     useEffect(() => {
@@ -21,6 +22,11 @@ function App() {
             dispatch(logIn(token))
         }
     }, [dispatch])
+    useLayoutEffect(() => {
+        if (!isLogged) {
+            navigate('/login')
+        }
+    }, [isLogged, navigate])
     return !isLogged ? <Routes>
         <Route path={'/login'} element={<Login/>}/>
         <Route path="*" element={<Navigate to={'/login'}/>}/>
