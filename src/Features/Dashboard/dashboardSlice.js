@@ -2,9 +2,9 @@ import {createAsyncThunk, createSlice} from '@reduxjs/toolkit'
 import Api from '../../Config/api'
 import {toast} from 'react-toastify'
 
-export const getAllFirms = createAsyncThunk('dashboard/getAllFirms', async (obj, {rejectWithValue}) => {
+export const getAllFirms = createAsyncThunk('dashboard/getAllFirms', async (id, {rejectWithValue}) => {
     try {
-        const {data} = await Api.get('/firms')
+        const {data} = await Api.get(`/firms/${id}`)
         return data
     } catch (message) {
         return rejectWithValue(message)

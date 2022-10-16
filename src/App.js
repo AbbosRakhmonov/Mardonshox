@@ -1,5 +1,5 @@
 import {Navigate, Route, Routes, useNavigate} from 'react-router-dom'
-import React, {lazy, useEffect, useLayoutEffect} from 'react'
+import React, {lazy, useEffect} from 'react'
 import {useDispatch, useSelector} from 'react-redux'
 import {logIn} from './Features/Auth/authSlice'
 
@@ -22,7 +22,7 @@ function App() {
             dispatch(logIn(token))
         }
     }, [dispatch])
-    useLayoutEffect(() => {
+    useEffect(() => {
         if (!isLogged) {
             navigate('/login')
         }

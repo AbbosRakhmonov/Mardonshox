@@ -70,8 +70,8 @@ function Dashboard() {
         })
     }
     useEffect(() => {
-        dispatch(getAllFirms())
-    }, [dispatch])
+        dispatch(getAllFirms(user.id))
+    }, [dispatch, user.id])
     return (
         <div className="container-fluid">
             <WarningModal isOpen={warning} toggle={toggleWarningModal} success={deleteFirm}/>

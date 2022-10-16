@@ -7,6 +7,7 @@ import WarningModal from '../../Components/Modal/warningModal'
 import {IoChevronBack} from 'react-icons/io5'
 import {useDispatch, useSelector} from 'react-redux'
 import {createReport, deleteReport, getReports, updateReport} from './todoSlice'
+import TodoFooter from '../../Components/todoFooter'
 
 function Todos() {
     const {id} = useParams()
@@ -26,8 +27,8 @@ function Todos() {
     const addTodo = (e) => {
         e.preventDefault()
         const obj = {
-            income: Number(e.target.income.value) || 0,
-            outcome: Number(e.target.outcome.value) || 0,
+            income: Number(e.target?.income?.value) || 0,
+            outcome: Number(e.target?.outcome?.value) || 0,
             comment: e.target.comment.value,
             firm: id
         }
@@ -47,8 +48,8 @@ function Todos() {
         e.preventDefault()
         const obj = {
             ...currentTodo,
-            income: e.target.income.value || 0,
-            outcome: e.target.outcome.value || 0,
+            income: e.target?.income?.value || 0,
+            outcome: e.target?.outcome?.value || 0,
             comment: e.target.comment.value
         }
         dispatch(updateReport(obj)).then(({error}) => {
@@ -81,6 +82,7 @@ function Todos() {
                         <span>Ортга қайтиш</span></Link>
                 </div>
             </div>
+            <TodoFooter/>
             <div className="row">
                 <div className="col-md-12">
                     <ConstTable data={reports} edit={editTodo} del={deleteTodo} loading={loading}/>

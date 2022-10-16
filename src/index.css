@@ -29,13 +29,29 @@ body {
 
 .plus-btn {
   right: 2rem;
-  bottom: 2rem;
+  bottom: 3rem;
   box-shadow: 0 10px 5px rgba(0, 0, 0, 0.1);
   transition: 0.3s ease;
+  z-index: 3;
+}
+
+.my-alert {
+  z-index: 2;
 }
 
 .plus-btn:active {
   scale: 0.95;
+}
+
+@media screen and (max-width: 768px) {
+  .footer-text {
+    font-size: 0.8rem;
+  }
+
+  .plus-btn {
+    bottom: 5rem;
+    right: 1rem;
+  }
 }
 
 
