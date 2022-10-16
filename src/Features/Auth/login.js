@@ -1,8 +1,10 @@
 import React from 'react'
 import {useDispatch} from 'react-redux'
 import {signIn} from './authSlice'
+import {useNavigate} from 'react-router-dom'
 
 function Login() {
+    const navigate = useNavigate()
     const dispatch = useDispatch()
     const submitHandler = (e) => {
         e.preventDefault()
@@ -10,7 +12,12 @@ function Login() {
             login: e.target.login.value,
             password: e.target.password.value
         }
-        dispatch(signIn(obj))
+        dispatch(signIn(obj)).then(({error}) => {
+            if (!error) {
+                console.log('salom')
+                navigate('/', {replace: true})
+            }
+        })
     }
     return (
         <div style={{width: '100vw', height: '100vh'}} className={'d-flex align-items-center justify-content-center'}>
