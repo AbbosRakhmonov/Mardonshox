@@ -12,9 +12,8 @@ function Login() {
             login: e.target.login.value,
             password: e.target.password.value
         }
-        dispatch(signIn(obj)).then(({error}) => {g
+        dispatch(signIn(obj)).then(({error}) => {
             if (!error) {
-                console.log('salom')
                 navigate('/', {replace: true})
             }
         })
