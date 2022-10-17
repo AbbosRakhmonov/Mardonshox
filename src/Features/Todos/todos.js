@@ -30,7 +30,8 @@ function Todos() {
             income: Number(e.target?.income?.value) || 0,
             outcome: Number(e.target?.outcome?.value) || 0,
             comment: e.target.comment.value,
-            firm: id
+            firm: id,
+            createdAt: new Date(e.target.createdAt.value).toISOString()
         }
         dispatch(createReport(obj)).then(({error}) => {
             if (!error) toggleModal()
@@ -50,7 +51,8 @@ function Todos() {
             ...currentTodo,
             income: e.target?.income?.value || 0,
             outcome: e.target?.outcome?.value || 0,
-            comment: e.target.comment.value
+            comment: e.target.comment.value,
+            createdAt: new Date(e.target.createdAt.value).toISOString()
         }
         dispatch(updateReport(obj)).then(({error}) => {
             if (!error) toggleModal()
@@ -75,6 +77,7 @@ function Todos() {
                 comment={currentTodo?.comment}
                 out={currentTodo?.outcome}
                 inc={currentTodo?.income}
+                date={currentTodo?.createdAt}
                 success={currentTodo ? saveEditedTodo : addTodo}/>
             <div className="row my-3">
                 <div className="d-flex">

@@ -3,13 +3,13 @@ import {Modal, ModalBody, ModalFooter, ModalHeader} from 'reactstrap'
 import FirmBody from './ModalBody/firmBody'
 import TodoBody from './ModalBody/todoBody'
 
-function ConstModal({isOpen, toggle, body, success, comment, inc, out, firm}) {
+function ConstModal({isOpen, toggle, body, success, comment, inc, out, firm, date}) {
     const checkBody = (body) => {
         switch (body) {
             case 'todo':
-                return <TodoBody comment={comment} inc={inc} out={out}/>
+                return <TodoBody comment={comment} inc={inc} out={out} date={date}/>
             default:
-                return <FirmBody name={firm} />
+                return <FirmBody name={firm}/>
         }
     }
     return (

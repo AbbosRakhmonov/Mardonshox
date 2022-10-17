@@ -1,6 +1,6 @@
 import React, {useState} from 'react'
 
-function TodoBody({inc = 0, out = 0, comment = ''}) {
+function TodoBody({inc = 0, out = 0, comment = '', date}) {
     const [income, setIncome] = useState(inc)
     const [outcome, setOutcome] = useState(out)
     const [option, setOption] = useState(() => {
@@ -24,10 +24,14 @@ function TodoBody({inc = 0, out = 0, comment = ''}) {
     const handleChangeSelect = (e) => {
         setOption(e.target.value)
     }
-
     return (
         <div className={'row g-3'}>
-            <div className="col-md-12">
+            <div className="col-md-4">
+                <input type="date" className="form-control" aria-label="Date"
+                       name={'createdAt'}
+                       defaultValue={new Date(date || new Date()).toISOString().slice(0, 10)}/>
+            </div>
+            <div className="col-md-8">
                 <select className="form-select" aria-label="Default select example" value={option}
                         onChange={handleChangeSelect}>
                     <option value={''} disabled>Танлаш</option>
