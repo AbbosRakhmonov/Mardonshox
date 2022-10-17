@@ -1,14 +1,20 @@
-import React from 'react'
+import React, {useEffect, useState} from 'react'
 import {Cell, Column, HeaderCell, Table} from 'rsuite-table'
 import {IoTrash} from 'react-icons/io5'
 
 
 function ConstTable({data, edit, del, loading}) {
+    const [heightOfTable, setHeightOfTable] = useState(window.innerHeight * 0.68)
     const getHeight = () => {
-        return window.innerHeight * 0.68
+        setHeightOfTable(window.innerHeight * 0.68)
     }
+    useEffect(() => {
+        window.addEventListener('resize', () => {
+            getHeight()
+        })
+    }, [])
     return (
-        <Table data={data} cellBordered={true} wordWrap={'break-word'} loading={loading} height={getHeight()}
+        <Table data={data} cellBordered={true} wordWrap={'break-word'} loading={loading} height={heightOfTable}
                affixHeader={true} renderEmpty={() => {
             return <div className="rs-table-body-info">No data found</div>
         }} rowHeight={30}
