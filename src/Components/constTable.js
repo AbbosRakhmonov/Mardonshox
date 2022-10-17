@@ -21,6 +21,14 @@ function ConstTable({data, edit, del, loading}) {
                     }
                 </Cell>
             </Column>
+            <Column fixed verticalAlign={'middle'} width={90}>
+                <HeaderCell>Сана</HeaderCell>
+                <Cell>
+                    {
+                        rowData => (<span>{new Date(rowData.createdAt).toLocaleDateString('ru-RU')}</span>)
+                    }
+                </Cell>
+            </Column>
             <Column flexGrow={1} verticalAlign={'middle'}>
                 <HeaderCell style={{background: '#009A42'}}>Кирим</HeaderCell>
                 <Cell>
