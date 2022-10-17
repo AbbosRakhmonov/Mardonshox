@@ -4,8 +4,11 @@ import {IoTrash} from 'react-icons/io5'
 
 
 function ConstTable({data, edit, del, loading}) {
+    const getHeight = () => {
+        return window.innerHeight * 0.68
+    }
     return (
-        <Table data={data} cellBordered={true} wordWrap={'break-word'} loading={loading} height={'68vh'}
+        <Table data={data} cellBordered={true} wordWrap={'break-word'} loading={loading} height={getHeight()}
                affixHeader={true} renderEmpty={() => {
             return <div className="rs-table-body-info">No data found</div>
         }} rowHeight={30}
