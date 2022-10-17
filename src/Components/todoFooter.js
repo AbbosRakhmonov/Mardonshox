@@ -15,7 +15,7 @@ function TodoFooter() {
         })
         setAllIncome(income)
         setAllOutcome(outcome)
-        setAllBalance(income - outcome)
+        setAllBalance(outcome - income)
     }, [reports])
     return (
         <div

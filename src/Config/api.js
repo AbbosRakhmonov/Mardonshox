@@ -27,7 +27,6 @@ instance.interceptors.response.use(
     (response) => response,
     ({response: {data, status}}) => {
         if (status === 401) {
-            localStorage.removeItem('token')
             Store.dispatch(logOut('Авторизация устарела'))
         }
         return Promise.reject(data.error)

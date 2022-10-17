@@ -29,10 +29,14 @@ const authSlice = createSlice({
         loading: false
     },
     reducers: {
-        logOut: (state) => {
+        logOut: (state, {payload}) => {
             state.user = null
             state.isLogged = false
             localStorage.removeItem('token')
+            toast.error(payload, {
+                autoClose: 1500,
+                theme: 'colored'
+            })
         },
         logIn: (state, {payload}) => {
             state.isLogged = true
