@@ -5,7 +5,7 @@ import {IoTrash} from 'react-icons/io5'
 
 function ConstTable({data, edit, del, loading}) {
     return (
-        <Table data={data} cellBordered={true} wordWrap={'break-word'} loading={loading} autoHeight={true}
+        <Table data={data} cellBordered={true} wordWrap={'break-word'} loading={loading} height={'68vh'}
                affixHeader={true} renderEmpty={() => {
             return <div className="rs-table-body-info">No data found</div>
         }} rowHeight={30}
