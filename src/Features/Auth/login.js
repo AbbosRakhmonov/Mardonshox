@@ -1,6 +1,6 @@
-import React from 'react'
+import React, {useEffect} from 'react'
 import {useDispatch} from 'react-redux'
-import {signIn} from './authSlice'
+import {logIn, signIn} from './authSlice'
 import {useNavigate} from 'react-router-dom'
 
 function Login() {
@@ -18,6 +18,14 @@ function Login() {
             }
         })
     }
+    useEffect(() => {
+        const token = localStorage.getItem('token') || null
+        if (token) {
+            dispatch(logIn(token))
+            navigate('/', {replace: true})
+        }
+    }, [dispatch, navigate])
+
     return (
         <div style={{width: '100vw', height: '100vh'}} className={'d-flex align-items-center justify-content-center'}>
             <div className="container">
