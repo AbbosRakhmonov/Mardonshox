@@ -26,7 +26,7 @@ instance.interceptors.request.use(
 instance.interceptors.response.use(
     (response) => response,
     (response) => {
-        console.log(response.status)
+        console.log(response)
         if (response.code === 'ERR_NETWORK') {
             Store.dispatch(logOut('Интернет билан боғлиқ муаммо мавжуд'))
         }
