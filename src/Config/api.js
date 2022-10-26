@@ -1,5 +1,5 @@
 import axios from 'axios'
-import {logOut} from '../Features/Auth/authSlice'
+import { logOut } from '../Features/Auth/authSlice'
 import Store from '../App/store'
 
 const baseURL = process.env.NODE_ENV === 'development' ? 'http://localhost:5000/api/v1' : 'https://mardonshox.herokuapp.com/api/v1'
@@ -26,6 +26,7 @@ instance.interceptors.request.use(
 instance.interceptors.response.use(
     (response) => response,
     (response) => {
+        console.log(response.status)
         if (response.code === 'ERR_NETWORK') {
             Store.dispatch(logOut('Интернет билан боғлиқ муаммо мавжуд'))
         }
