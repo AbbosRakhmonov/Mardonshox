@@ -26,11 +26,10 @@ instance.interceptors.request.use(
 instance.interceptors.response.use(
     (response) => response,
     (response) => {
-        console.log(response)
         if (response.code === 'ERR_NETWORK') {
             Store.dispatch(logOut('Интернет билан боғлиқ муаммо мавжуд'))
         }
-        if (response.status === 401) {
+        if (response.response.status === 401) {
             Store.dispatch(logOut('Авторизация устарела'))
         }
         return Promise.reject(response?.data?.error)
