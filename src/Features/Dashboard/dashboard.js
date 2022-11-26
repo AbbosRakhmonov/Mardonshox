@@ -11,7 +11,7 @@ import NotFound from '../../Components/notFound'
 
 function Dashboard() {
     const dispatch = useDispatch()
-    const {firms, loading} = useSelector(state => state.firm)
+    const {firms, loading, incomes, outcomes, total} = useSelector(state => state.firm)
     const {user} = useSelector(state => state.auth)
     const [modal, setModal] = useState(false)
     const [warning, setWarning] = useState(false)
@@ -32,7 +32,7 @@ function Dashboard() {
         setCurrentFirm(data)
         setWarning(true)
     }
-    const addNewFirm = (e) => {
+    const addNewFirm = () => {
         setModal(true)
     }
 
@@ -63,7 +63,10 @@ function Dashboard() {
     }
     const deleteFirm = (e) => {
         e.preventDefault()
-        dispatch(deleteSingleFirm(currentFirm._id)).then(({error}) => {
+        dispatch(deleteSingleFirm({
+            id: currentFirm._id,
+            user: user.id
+        })).then(({error}) => {
             if (!error) {
                 toggleWarningModal()
             }
@@ -73,21 +76,37 @@ function Dashboard() {
         dispatch(getAllFirms(user.id))
     }, [dispatch, user.id])
     return (
-        <div className="container-fluid">
-            <WarningModal isOpen={warning} toggle={toggleWarningModal} success={deleteFirm}/>
-            <ConstModal toggle={toggleModal} isOpen={modal} firm={currentFirm?.name}
-                        success={currentFirm ? saveEditedFirm : submitFirm}/>
-            {loading ? <div className="row mb-4">
-                <Spinner/>
-            </div> : firms.length ? <div className={'row g-4'}>
-                {
-                    map(firms, (data) => (
-                        <Card key={uniqueId('card')} data={data} del={deleteFirmModal} edit={editFirmName}/>))
-                }
+        <>
+            <div
+                className={'alert alert-secondary sticky-top mb-4 d-flex gap-4 gap-sm-5 justify-content-center'}>
+            <span
+                className={'h5 footer-text text-success text-center'}>Барча киримлар: &nbsp;
+                <span
+                    className={'d-inline-block mt-2 d-sm-inline mt-sm-0'}>{incomes?.toLocaleString('ru-RU')}</span></span>
+                <span
+                    className={'h5 footer-text text-danger text-center'}>Барча чикимлар: &nbsp;
+                    <span
+                        className={'d-inline-block mt-2 d-sm-inline mt-sm-0'}>{outcomes?.toLocaleString('ru-RU')}</span></span>
+                <span
+                    className={'h5 footer-text text-center'}>Жами: &nbsp;
+                    <span className={'d-inline-block mt-2 d-sm-inline mt-sm-0'}>{total?.toLocaleString('ru-RU')}</span></span>
+            </div>
+            <div className="container-fluid">
+                <WarningModal isOpen={warning} toggle={toggleWarningModal} success={deleteFirm}/>
+                <ConstModal toggle={toggleModal} isOpen={modal} firm={currentFirm?.name}
+                            success={currentFirm ? saveEditedFirm : submitFirm}/>
+                {loading ? <div className="row mb-4">
+                    <Spinner/>
+                </div> : firms.length ? <div className={'row g-4'}>
+                    {
+                        map(firms, (data) => (
+                            <Card key={uniqueId('card')} data={data} del={deleteFirmModal} edit={editFirmName}/>))
+                    }
 
-            </div> : <NotFound/>}
-            <PlusButton onClick={addNewFirm}/>
-        </div>
+                </div> : <NotFound/>}
+                <PlusButton onClick={addNewFirm}/>
+            </div>
+        </>
     )
 }
 

@@ -2,6 +2,8 @@ import {createAsyncThunk, createSlice} from '@reduxjs/toolkit'
 import Api from '../../Config/api'
 import {toast} from 'react-toastify'
 
+const filterByDate = (todos) => todos.sort((a, b) => new Date(a.createdAt) - new Date(b.createdAt))
+
 export const getReports = createAsyncThunk(
     'reports/getReports',
     async (id, {rejectWithValue}) => {
@@ -65,7 +67,7 @@ const todoSlice = createSlice({
         },
         [getReports.fulfilled]: (state, {payload}) => {
             state.loading = false
-            state.reports = payload.data
+            state.reports = filterByDate(payload.data)
             state.count = payload.count
         },
         [getReports.rejected]: (state, {payload}) => {
@@ -81,7 +83,7 @@ const todoSlice = createSlice({
         },
         [createReport.fulfilled]: (state, {payload}) => {
             state.loading = false
-            state.reports.push(payload.data)
+            state.reports = filterByDate([...state.reports, payload.data])
             state.count = state.count + 1
         },
         [createReport.rejected]: (state, {payload}) => {
@@ -97,7 +99,7 @@ const todoSlice = createSlice({
         },
         [updateReport.fulfilled]: (state, {payload}) => {
             state.loading = false
-            state.reports = state.reports.map(item => item._id === payload.data._id ? payload.data : item)
+            state.reports = filterByDate(state.reports.map(item => item._id === payload.data._id ? payload.data : item))
         },
         [updateReport.rejected]: (state, {payload}) => {
             state.loading = false
@@ -112,7 +114,7 @@ const todoSlice = createSlice({
         },
         [deleteReport.fulfilled]: (state, {payload}) => {
             state.loading = false
-            state.reports = state.reports.filter(item => item._id !== payload.data)
+            state.reports = filterByDate(state.reports.filter(item => item._id !== payload.data))
             state.count = state.count - 1
         },
         [deleteReport.rejected]: (state, {payload}) => {

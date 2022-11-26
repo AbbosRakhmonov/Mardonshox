@@ -11,9 +11,9 @@ export const getAllFirms = createAsyncThunk('dashboard/getAllFirms', async (id, 
     }
 })
 
-export const deleteSingleFirm = createAsyncThunk('dashboard/deleteFirm', async (id, {rejectWithValue}) => {
+export const deleteSingleFirm = createAsyncThunk('dashboard/deleteFirm', async ({id, user}, {rejectWithValue}) => {
     try {
-        const {data} = await Api.delete(`/firms/${id}`)
+        const {data} = await Api.delete(`/firms/${id}`, {data: {user}})
         return data
     } catch (message) {
         return rejectWithValue(message)
@@ -44,7 +44,10 @@ const dashboardSlice = createSlice({
         firms: [],
         count: 0,
         loading: true,
-        error: null
+        error: null,
+        incomes: 0,
+        outcomes: 0,
+        total: 0
     },
     reducers: {},
     extraReducers: {
@@ -55,6 +58,9 @@ const dashboardSlice = createSlice({
             state.loading = false
             state.firms = payload.data
             state.count = payload.count
+            state.incomes = payload.incomes
+            state.outcomes = payload.outcomes
+            state.total = payload.all
         },
         [getAllFirms.rejected]: (state, {payload}) => {
             state.loading = false
@@ -68,9 +74,13 @@ const dashboardSlice = createSlice({
             state.loading = true
         },
         [deleteSingleFirm.fulfilled]: (state, {payload}) => {
+            console.log(payload)
             state.loading = false
             state.firms = state.firms.filter(firm => firm._id !== payload.data)
             state.count = state.count - 1
+            state.incomes = payload.incomes
+            state.outcomes = payload.outcomes
+            state.total = payload.all
         },
         [deleteSingleFirm.rejected]: (state, {payload}) => {
             state.loading = false
