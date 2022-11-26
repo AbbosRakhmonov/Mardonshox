@@ -1,7 +1,5 @@
 import {Navigate, Route, Routes} from 'react-router-dom'
-import React, {lazy, useLayoutEffect} from 'react'
-import {useDispatch} from 'react-redux'
-import {logIn} from './Features/Auth/authSlice'
+import React, {lazy} from 'react'
 
 
 const Dashboard = lazy(() => import('./Features/Dashboard/dashboard'))

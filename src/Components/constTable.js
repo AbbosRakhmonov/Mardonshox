@@ -4,14 +4,16 @@ import {IoTrash} from 'react-icons/io5'
 
 
 function ConstTable({data, edit, del, loading}) {
-    const [heightOfTable, setHeightOfTable] = useState(window.innerHeight * 0.68)
+    const [heightOfTable, setHeightOfTable] = useState(0)
     const getHeight = () => {
-        setHeightOfTable(window.innerHeight * 0.68)
+        const footerHeight = document.querySelector('.footer-bottom')?.offsetHeight
+        return (window.innerHeight - footerHeight) * 0.7
     }
     useEffect(() => {
         window.addEventListener('resize', () => {
-            getHeight()
+            setHeightOfTable(getHeight())
         })
+        setHeightOfTable(getHeight())
     }, [])
     return (
         <Table data={data} cellBordered={true} wordWrap={'break-word'} loading={loading} height={heightOfTable}
