@@ -6,8 +6,10 @@ import {IoTrash} from 'react-icons/io5'
 function ConstTable({data, edit, del, loading}) {
     const [heightOfTable, setHeightOfTable] = useState(0)
     const getHeight = () => {
+        const headerHeight = document.querySelector('header')?.offsetHeight
         const footerHeight = document.querySelector('.footer-bottom')?.offsetHeight
-        return (window.innerHeight - footerHeight) * 0.7
+        const topOfTableHeight = document.querySelector('.top-of-table')?.offsetHeight
+        return (window.innerHeight - footerHeight - headerHeight - topOfTableHeight) * 0.85
     }
     useEffect(() => {
         window.addEventListener('resize', () => {

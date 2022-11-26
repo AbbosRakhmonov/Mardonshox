@@ -118,7 +118,7 @@ function Todos() {
                 inc={currentTodo?.income}
                 date={currentTodo?.createdAt}
                 success={currentTodo ? saveEditedTodo : addTodo}/>
-            <div className="row my-3">
+            <div className="row top-of-table my-3">
                 <div className="col-12">
                     <div className="d-flex">
                         <Link to={-1} className={'h5 d-flex align-items-center text-decoration-none'}><IoChevronBack/>
@@ -126,7 +126,7 @@ function Todos() {
                     </div>
                     <div className="row mt-4 my-2 px-2">
                         <div className="col-12">
-                            <div className="d-flex flex-wrap gap-5">
+                            <div className="d-flex flex-wrap flex-column flex-sm-row gap-3 gap-md-5">
                                 <div className="d-flex gap-2 align-items-center">
                                     <input type="checkbox" className="form-check-input" style={{
                                         width: '1.5rem',
@@ -137,33 +137,35 @@ function Todos() {
                                         fontSize: '1rem'
                                     }} htmlFor="exampleCheck1">Филтрлаш</label>
                                 </div>
-                                <div className="d-flex align-items-center gap-3">
-                                    <label className={`form-check-label ${!isChecked ? 'text-muted' : ''}`} style={{
-                                        fontSize: '1rem'
-                                    }} htmlFor="date1">Бошлангич сана :</label>
-                                    <input
-                                        type="date"
-                                        className="form-control w-auto" id={'date1'} aria-label="Date"
-                                        name={'startDate'}
-                                        value={startDate}
-                                        disabled={!isChecked}
-                                        onChange={onChangeStartDate}
-                                    />
-                                </div>
-                                <div className="d-flex align-items-center gap-3">
-                                    <label className={`form-check-label ${!isChecked ? 'text-muted' : ''}`} style={{
-                                        fontSize: '1rem'
-                                    }} htmlFor="date2">Тугаш сана :
-                                    </label>
-                                    <input
-                                        type="date"
-                                        className="form-control w-auto" id={'date2'} aria-label="Date"
-                                        name={'endDate'}
-                                        value={endDate}
-                                        disabled={!isChecked}
-                                        onChange={onChangeEndDate}
-                                    />
-                                </div>
+                               <div className={'d-flex gap-3 flex-wrap'}>
+                                   <div className="d-flex align-items-center gap-3">
+                                       <label className={`form-check-label ${!isChecked ? 'text-muted' : ''}`} style={{
+                                           fontSize: '1rem'
+                                       }} htmlFor="date1">Бошлангич сана :</label>
+                                       <input
+                                           type="date"
+                                           className="form-control w-auto" id={'date1'} aria-label="Date"
+                                           name={'startDate'}
+                                           value={startDate}
+                                           disabled={!isChecked}
+                                           onChange={onChangeStartDate}
+                                       />
+                                   </div>
+                                   <div className="d-flex align-items-center gap-3">
+                                       <label className={`form-check-label ${!isChecked ? 'text-muted' : ''}`} style={{
+                                           fontSize: '1rem'
+                                       }} htmlFor="date2">Тугаш сана :
+                                       </label>
+                                       <input
+                                           type="date"
+                                           className="form-control w-auto" id={'date2'} aria-label="Date"
+                                           name={'endDate'}
+                                           value={endDate}
+                                           disabled={!isChecked}
+                                           onChange={onChangeEndDate}
+                                       />
+                                   </div>
+                               </div>
                             </div>
                         </div>
                     </div>
