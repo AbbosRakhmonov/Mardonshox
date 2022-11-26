@@ -97,10 +97,6 @@ function Todos() {
     }
 
     useEffect(() => {
-        setTableData(reports)
-    }, [reports])
-
-    useEffect(() => {
         if (!isChecked) {
             setStartDate('')
             setEndDate('')
