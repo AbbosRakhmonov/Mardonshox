@@ -12,7 +12,7 @@ import TodoFooter from '../../Components/todoFooter'
 function Todos() {
     const {id} = useParams()
     const dispatch = useDispatch()
-    const {reports, loading} = useSelector(state => state.report)
+    const {reports, loading, firmName} = useSelector(state => state.report)
     const [tableData, setTableData] = useState(reports)
     const [currentTodo, setCurrentTodo] = useState(null)
     const [warningModal, setWarningModal] = useState(false)
@@ -120,9 +120,10 @@ function Todos() {
                 success={currentTodo ? saveEditedTodo : addTodo}/>
             <div className="row top-of-table my-3">
                 <div className="col-12">
-                    <div className="d-flex">
+                    <div className="d-flex justify-content-between align-items-center">
                         <Link to={-1} className={'h5 d-flex align-items-center text-decoration-none'}><IoChevronBack/>
                             <span>Ортга қайтиш</span></Link>
+                        <h5 className={'h5'}>{firmName}</h5>
                     </div>
                     <div className="row mt-4 my-2 px-2">
                         <div className="col-12">

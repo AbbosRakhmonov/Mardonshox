@@ -56,6 +56,7 @@ const todoSlice = createSlice({
     name: 'report',
     initialState: {
         reports: [],
+        firmName: '',
         count: 0,
         loading: true,
         error: null
@@ -68,6 +69,7 @@ const todoSlice = createSlice({
         [getReports.fulfilled]: (state, {payload}) => {
             state.loading = false
             state.reports = filterByDate(payload.data)
+            state.firmName = payload.firmName
             state.count = payload.count
         },
         [getReports.rejected]: (state, {payload}) => {
