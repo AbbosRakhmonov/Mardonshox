@@ -6,9 +6,9 @@ const filterByDate = (todos) => todos.sort((a, b) => new Date(a.createdAt) - new
 
 export const getReports = createAsyncThunk(
     'reports/getReports',
-    async (id, {rejectWithValue}) => {
+    async ({id, startDate = '', endDate = ''}, {rejectWithValue}) => {
         try {
-            const {data} = await Api.get(`/reports/${id}`)
+            const {data} = await Api.post(`/reports/${id}`, {startDate, endDate})
             return data
         } catch (message) {
             return rejectWithValue(message)
