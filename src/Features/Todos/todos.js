@@ -146,7 +146,27 @@ function Todos() {
         doc.setFont("PTSerif");
         doc.setFontSize(12);
         doc.text(`Фирма: ${firmName}`, 10, 10);
-        doc.text(`Сана: ${new Date().toLocaleDateString("ru-RU")}`, 10, 20);
+        // right align text
+        doc.text(`Сана: ${new Date(startDate).toLocaleDateString('ru-RU')} - ${new Date(endDate).toLocaleDateString('ru-RU')}`, 200, 10, "right");
+        // incomes, outcomes, all
+        let income = 0;
+        let outcome = 0;
+        reports.forEach(item => {
+            income += item.income;
+            outcome += item.outcome;
+        })
+        // line
+        doc.setLineWidth(0.5);
+        doc.line(10, 15, 200, 15);
+        // income with green color left align
+        doc.setTextColor(0, 191, 41);
+        doc.text(`Киримлар: ${income.toLocaleString('ru-Ru')}`, 10, 22, "left");
+        // outcome with red color, center align
+        doc.setTextColor(212, 28, 28);
+        doc.text(`Чиқимлар: ${outcome.toLocaleString('ru-RU')}`, 100, 22, "center");
+        // all with blue colo right align
+        doc.setTextColor(5, 80, 166);
+        doc.text(`Жами: ${(outcome - income).toLocaleString('ru-RU')}`, 200, 22, "right");
 
         const tableColumn = ["№", "Сана", "Кирим", "Чиқим", "Изоҳ"];
 
@@ -173,7 +193,7 @@ function Todos() {
         const dateStr = new Date().toLocaleDateString("ru-RU");
         const fileName = `${firmName}-Ҳисобот-${dateStr}.pdf`;
         doc.save(fileName);
-    }, [reports, firmName]);
+    }, [reports, firmName, startDate, endDate]);
 
     useEffect(() => {
         if (isChecked) {
